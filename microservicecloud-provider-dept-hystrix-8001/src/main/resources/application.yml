@@ -1,0 +1,44 @@
+server:
+    port: 8001
+    
+mybatis:
+#  config-location: classpath:mybatis/mybatis.cfg.xml     # mybatis配置文件所在路径
+  type-aliases-package: com.sun.entities                  # 所有Entity别名类所在包
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml                   # mapper映射文件
+  configuration:
+    map-underscore-to-camel-case: true                    #开启驼峰命名
+
+#服务名称
+spring:
+  application:
+    name: microservicecloud-dept
+#数据源
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cloudDB01?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: fan520
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#开启mybatis日志输出
+logging:
+  level:
+    com:
+      sun: debug
+
+eureka:
+  instance:
+    #注册服务的时候使用IP地址
+    prefer-ip-address: true
+    #为服务别名
+    instance-id: sunhongwei-8001-Hystrix
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+info:
+  app.name: atguigu-microservicecloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
